@@ -19,6 +19,7 @@ module.exports = {
     embed: require('./embed-renderer'),
     file: require('./file-renderer'),
     gallery: require('./gallery-renderer'),
+    carousel: require('./carousel-renderer'),
     header: {
         1: require('./header-v1-renderer'),
         2: require('./header-v2-renderer')

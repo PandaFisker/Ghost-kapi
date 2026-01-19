@@ -1,4 +1,5 @@
 {
+    "proxy": "http://10.253.0.115:2368/",
     "component-structure": "flat",
     "component-class": "@glimmer/component",
     /**

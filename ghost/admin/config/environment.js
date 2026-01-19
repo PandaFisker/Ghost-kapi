@@ -52,6 +52,8 @@ module.exports = function (environment) {
         ENV['ember-cli-mirage'] = {
             enabled: false
         };
+
+        ENV.editorFilename = 'koenig-lexical.umd.js';
     }
 
     if (environment === 'test') {

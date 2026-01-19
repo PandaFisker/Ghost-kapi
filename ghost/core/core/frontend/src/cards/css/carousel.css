@@ -1,0 +1,213 @@
+.kg-carousel-card {
+    margin: 1.75em 0;
+    position: relative;
+}
+
+.kg-carousel-card .kg-carousel-container {
+    display: flex;
+    gap: 128px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 64px 56px;
+    scroll-behavior: smooth;
+
+    /* Leave room for arrows (sides) and dots (bottom) */
+    padding: 0 64px 56px;
+
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+
+    scrollbar-width: none; /* Firefox */
+}
+
+/* Optional controls markup (structure hooks for JS) */
+.kg-carousel-card .kg-carousel-controls {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.kg-carousel-card .kg-carousel-arrow {
+    pointer-events: auto;
+    position: absolute;
+    top: calc(50% - 56px);
+    transform: translateY(-50%);
+
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 0;
+
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    cursor: pointer;
+
+    display: grid;
+    place-items: center;
+
+    transition: background 220ms ease, transform 220ms ease;
+}
+
+.kg-carousel-card .kg-carousel-arrow-prev {
+    left: 16px;
+}
+
+.kg-carousel-card .kg-carousel-arrow-next {
+    right: 16px;
+}
+
+/* Simple chevrons via CSS (can be replaced with SVG via JS) */
+.kg-carousel-card .kg-carousel-arrow::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+}
+
+.kg-carousel-card .kg-carousel-arrow-prev::before {
+    transform: rotate(-135deg);
+    margin-left: 2px;
+}
+
+.kg-carousel-card .kg-carousel-arrow-next::before {
+    transform: rotate(45deg);
+    margin-right: 2px;
+}
+
+.kg-carousel-card .kg-carousel-arrow:hover {
+    background: rgba(0, 0, 0, 0.75);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.kg-carousel-card .kg-carousel-dots {
+    pointer-events: auto;
+    position: absolute;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+
+    display: flex;
+    gap: 16px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.kg-carousel-card .kg-carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    border: 0;
+    background: rgba(255, 255, 255, 0.45);
+    cursor: pointer;
+
+    transition: transform 200ms ease, background 200ms ease;
+}
+
+/* Hook for JS to mark active dot */
+.kg-carousel-card .kg-carousel-dot.is-active,
+.kg-carousel-card .kg-carousel-dot[aria-current='true'] {
+    background: rgba(255, 255, 255, 0.95);
+    transform: scale(1.4);
+}
+
+.kg-carousel-card .kg-carousel-container::-webkit-scrollbar {
+    display: none; /* Chromium/Safari */
+}
+
+.kg-carousel-card .kg-carousel-item {
+    /* Shrink the content area so controls aren't sitting on top of media */
+    flex: 0 0 calc(100% - 32px);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+
+    position: relative;
+
+    /* 16:9 responsive canvas */
+    aspect-ratio: 16 / 9;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* border-radius: 12px; */
+    overflow: hidden;
+    background: #000;
+
+    /* Fade-style transition (no scaling) */
+    transition: opacity 360ms ease, filter 360ms ease;
+    opacity: 0.9;
+    filter: brightness(0.92);
+}
+
+.kg-carousel-card .kg-carousel-item.is-active {
+    opacity: 1;
+    filter: none;
+}
+
+.kg-carousel-card .kg-carousel-item > a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    text-decoration: none;
+}
+
+.kg-carousel-card .kg-carousel-item img,
+.kg-carousel-card .kg-carousel-item video {
+    display: block;
+
+    /* Keep original media proportions and center within 16:9 canvas */
+    /* max-width: 80%;
+    max-height: 80%; */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.kg-carousel-card .kg-carousel-item video {
+    /* video element itself should not add its own background */
+    background: transparent;
+}
+
+.kg-carousel-card .kg-carousel-item:first-child {
+    margin-left: 64px;
+}
+
+.kg-carousel-card .kg-carousel-item:last-child {
+    margin-right: 64px;
+}
+
+.kg-carousel-card.kg-card-hascaption figcaption,
+.kg-carousel-card figcaption {
+    margin-top: 0.8em;
+    font-size: 0.95em;
+    line-height: 1.45;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.kg-carousel-card figcaption a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .kg-carousel-card.kg-card-hascaption figcaption,
+    .kg-carousel-card figcaption {
+        color: rgba(255, 255, 255, 0.7);
+    }
+}

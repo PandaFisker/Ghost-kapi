@@ -1,3 +1,9 @@
 {
-    "enableDeveloperExperiments": true
+    "enableDeveloperExperiments": true,
+    "mail": {
+        "transport": "Direct"
+    },
+    "security": {
+        "staffDeviceVerification": false
+    }
 }
