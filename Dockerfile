@@ -62,6 +62,17 @@ COPY .github/scripts/install-deps.sh .github/scripts/install-deps.sh
 RUN --mount=type=cache,target=/usr/local/share/.cache/yarn,id=yarn-cache \
     bash .github/scripts/install-deps.sh
 
+# Overlay local publish packages into node_modules/@tryghost
+COPY publish publish
+RUN if [ -d publish ]; then \
+    for pkg in publish/*; do \
+        [ -d "$pkg" ] || continue; \
+        name=$(basename "$pkg"); \
+        mkdir -p "node_modules/@tryghost/$name"; \
+        cp -a "$pkg/." "node_modules/@tryghost/$name/"; \
+    done; \
+fi
+
 # --------------------
 # Shade Builder
 # --------------------
